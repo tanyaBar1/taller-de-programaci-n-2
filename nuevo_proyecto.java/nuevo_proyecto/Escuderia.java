@@ -1,20 +1,30 @@
 package nuevo_proyecto;
 
 import java.util.List;
+
 import java.util.ArrayList;
 
 public class Escuderia {
    
-    private String nombre;
+    private String nombreEsc;
+
     private List<Auto> autos;
+
     private Pais pais;
-    private ArrayList<PilotoEscuderia> contratoEscuderia; 
+
+    private ArrayList<PilotoEscuderia> contratoEscuderia;
+
     private ArrayList<Mecanico> mecanicos;
 
+
     public Escuderia() {
-        nombre = "";
+
+        nombreEsc = "";
+
         contratoEscuderia = new ArrayList<>(); 
+
         autos = new ArrayList<>(); 
+
         mecanicos = new ArrayList<>(); 
 
     }
@@ -22,20 +32,26 @@ public class Escuderia {
 
     public Escuderia(String nombre) {
 
-        this.nombre = nombre;
+        this.nombreEsc = nombre;
         
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEsc() {
+
+        return nombreEsc;
     }
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public void setNombre(String nombre) {
+
+        this.nombreEsc = nombre;
     }
-    public Pais getPais(){
+
+
+    public Pais getPaisEsc() {
+
         return pais;
     }
+    
 
     public boolean existePais() {
 
@@ -44,11 +60,11 @@ public class Escuderia {
     }
 
 
-    public void setPais(Pais pais){
+    public void setPaisEsc(Pais pais){
 
         if (existePais() == true) {
 
-            System.out.println("Hay un país asignado: " + this.getPais()); 
+            System.out.println("Hay un país asignado: " + this.getPaisEsc()); 
 
             
         }
@@ -155,7 +171,7 @@ public class Escuderia {
     }
 
 
-    public void agregarMecanico(Mecanico mecanico, String dni, String nobre, String apellido, int aniosExperiencia, Especialidad especialidad) {
+    public void agregarMecanico(Mecanico mecanico, String dni, String nombre, String apellido, int aniosExperiencia, Especialidad especialidad) {
 
         if (existeMecanico(mecanico) == true) {
 

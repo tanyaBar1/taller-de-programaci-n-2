@@ -25,9 +25,9 @@ public class Mecanico extends Persona {
     } 
 
 
-    public Mecanico(String d, String n, String a, int anios, Especialidad e, Pais pais) {
+    public Mecanico(String d, String n, String a, int anios, Especialidad e) {
 
-        super(d, n, a, pais); 
+        super(d, n, a); 
 
         this.aniosExperiencia = anios; 
 
@@ -35,15 +35,7 @@ public class Mecanico extends Persona {
 
     }  
 
-    public Mecanico(String d, String n, String a, int anios, Especialidad e) {
 
-        super(d, n, a); 
-
-        this.aniosExperiencia = anios;
-
-        this.especialidad = e;
-        
-    }
 
 
     public int getAnios() {
@@ -56,6 +48,36 @@ public class Mecanico extends Persona {
     public Especialidad getEspecialidad() {
 
         return especialidad; 
+    }
+
+
+    public boolean existeEscuderia(Escuderia esc) {
+
+        for (Escuderia e : escuderias) {
+
+            if (e.getNombreEsc().equals(esc.getNombreEsc())) {
+
+                return true; 
+            }
+        }
+
+        return false; 
+
+    }
+
+
+    public void agregarEscuderia(Escuderia escuderia) {
+
+        if (existeEscuderia(escuderia) == true) {
+
+            System.out.println("La escudería ya existe.");
+
+        } 
+
+        else {
+
+            escuderias.add(escuderia); 
+        }
     }
 
 }

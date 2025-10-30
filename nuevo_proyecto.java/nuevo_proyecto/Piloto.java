@@ -34,14 +34,15 @@ public class Piloto extends Persona {
         podios = 0; 
 
         pilotoEscuderia = new ArrayList<>(); 
+
         autoPiloto = new ArrayList<>();
 
     } 
 
 
-    public Piloto(String d, String n, String a, Pais pais, int comp, int vic, int pole, int vueltas, int podios) {
+    public Piloto(String d, String n, String a, int comp, int vic, int pole, int vueltas, int podios) {
 
-        super(d, n, a, pais); 
+        super(d, n, a); 
 
         this.numeroCompetencia = comp; 
 
@@ -68,20 +69,24 @@ public class Piloto extends Persona {
         return numeroCompetencia; 
     } 
 
+
     public int getVictorias() {
 
         return victorias; 
     }
+
 
     public int getPosition() {
 
         return polePosition; 
     } 
 
+
     public int getVueltas() {
 
         return vueltasRapidas;
     }
+    
 
     public int getPodios() {
 

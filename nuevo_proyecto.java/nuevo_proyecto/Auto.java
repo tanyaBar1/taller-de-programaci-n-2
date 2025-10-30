@@ -1,14 +1,24 @@
 package nuevo_proyecto;
+
 import java.util.ArrayList;
+
 public class Auto {
+
     private String modelo;
+
     private String motor;
+
     private Escuderia escuderia;
+
     private ArrayList <AutoPiloto> autoPiloto;
 
+
 public Auto() {
+
     modelo = "";
+
     motor = "";
+
     autoPiloto = new ArrayList<>();
 }
 
@@ -26,19 +36,23 @@ public String getModelo() {
 }
 
 public void setModelo(String modelo) {
+
     this.modelo = modelo;
 }
 
 public String getMotor() {
+
     return motor;
 }
 
-public void setMotor(String motor){
+public void setMotor(String motor) {
+
     this.motor = motor;
 }
 
 
-public Escuderia getEscuderia(){
+public Escuderia getEscuderia() {
+
     return escuderia;
 }
 

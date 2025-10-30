@@ -23,27 +23,19 @@ public class Carrera {
 
         numeroVueltas = 0; 
 
-        horaRealizacion = " "; 
-
-        pais = null;
-        
-        circuito = null; 
+        horaRealizacion = " ";  
 
         autosPilotos = new ArrayList<>(); 
 
     } 
 
-    public Carrera(String fecha, int vueltas, String hora, Pais pais, Circuito circuito) {
+    public Carrera(String fecha, int vueltas, String hora) {
 
         this.fechaRealizacion = fecha; 
 
         this.numeroVueltas = vueltas; 
 
-        this.horaRealizacion = hora; 
-
-        this.pais = pais;
-
-        this.circuito = circuito; 
+        this.horaRealizacion = hora;  
 
     } 
 
@@ -61,5 +53,33 @@ public class Carrera {
     public String getHora() {
 
         return horaRealizacion; 
+    } 
+
+
+    public Pais getPaisCar() {
+
+        return pais;
+
+    }
+
+
+    public boolean existePais() {
+
+        return this.pais != null;
+
+    }
+
+
+    public void setPais(Pais pais){
+
+        if (existePais() == true) {
+
+            System.out.println("Hay un país asignado: " + this.getPaisCar()); 
+
+            
+        }
+
+        this.pais = pais;
+
     }
 }

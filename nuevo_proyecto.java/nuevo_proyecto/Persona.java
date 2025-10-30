@@ -4,7 +4,7 @@ public class Persona {
 
     private String dni;
 
-    private String nombre; 
+    private String nombrePer; 
 
     private String apellido; 
 
@@ -14,7 +14,7 @@ public class Persona {
 
         dni = " ";
 
-        nombre = " "; 
+        nombrePer = " "; 
 
         apellido = " "; 
 
@@ -22,23 +22,13 @@ public class Persona {
 
     } 
 
-    public Persona(String dni, String nombre, String apellido, Pais pais) {
 
-        this.dni = dni;
-
-        this.nombre = nombre;
-
-        this.apellido = apellido; 
-
-        this.pais = pais;
-
-    }  
 
     public Persona(String dni, String nombre, String apellido) {
 
         this.dni = dni;
 
-        this.nombre = nombre;
+        this.nombrePer = nombre;
 
         this.apellido = apellido;
         
@@ -50,9 +40,9 @@ public class Persona {
         return dni;
     }
 
-    public String getNombre() {
+    public String getNombrePer() {
 
-        return nombre; 
+        return nombrePer; 
     } 
 
     public String getApellido() {
@@ -61,7 +51,7 @@ public class Persona {
     } 
 
 
-    public Pais getPais() {
+    public Pais getPaisPer() {
 
         return pais;
     }
@@ -72,9 +62,9 @@ public class Persona {
         this.dni = dni; 
     }
 
-    public void setNombre(String nombre) {
+    public void setNombrePer(String nombre) {
 
-        this.nombre = nombre;
+        this.nombrePer = nombre;
     }
 
     public void setApellido(String apellido) {
@@ -82,9 +72,24 @@ public class Persona {
         this.apellido = apellido; 
     }
 
-    public void setPais(Pais p) {
+    public boolean existePais() {
 
-        this.pais = p; 
+        return this.pais != null;
+
+    }
+
+
+    public void setPaisPer(Pais pais){
+
+        if (existePais() == true) {
+
+            System.out.println("Hay un país asignado: " + this.getPaisPer()); 
+
+            
+        }
+
+        this.pais = pais;
+
     }
 
     
