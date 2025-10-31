@@ -1,4 +1,4 @@
-package nuevo_proyecto; 
+package proyecto_taller; 
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class Circuito {
 
     public void setNombreCir(String nombre) {
        
-        this.nombre= nombre;
+        this.nombre = nombre;
     }
 
 

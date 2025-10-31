@@ -1,4 +1,4 @@
-package nuevo_proyecto;
+package proyecto_taller;
 
 import java.util.List;
 

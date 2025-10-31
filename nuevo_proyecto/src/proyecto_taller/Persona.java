@@ -1,4 +1,4 @@
-package nuevo_proyecto;
+package proyecto_taller;
 
 public class Persona { 
 
