@@ -18,8 +18,6 @@ public class Persona {
 
         apellido = " "; 
 
-        pais = null;
-
     } 
 
 

@@ -25,13 +25,15 @@ public class Mecanico extends Persona {
     } 
 
 
-    public Mecanico(String d, String n, String a, int anios, Especialidad e) {
+    public Mecanico(String d, String n, String a, int anios, Especialidad e, Escuderia escuderia) {
 
         super(d, n, a); 
 
         this.aniosExperiencia = anios; 
 
         this.especialidad = e; 
+
+        this.agregarEscuderia(escuderia); 
 
     }  
 

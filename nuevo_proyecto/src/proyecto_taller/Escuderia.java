@@ -30,9 +30,11 @@ public class Escuderia {
     }
 
 
-    public Escuderia(String nombre) {
+    public Escuderia(String nombre, Mecanico mecanico) {
 
         this.nombreEsc = nombre;
+
+        this.agregarMecanico(mecanico); 
         
     }
 
@@ -138,7 +140,7 @@ public class Escuderia {
 
         if (existeAuto(auto) == true) {
 
-            System.out.println("El auto " + auto + " se encuentra registrado en la escudería."); 
+            System.out.println("El auto se encuentra registrado en la escudería."); 
 
 
         } 
@@ -187,6 +189,7 @@ public class Escuderia {
 
         }
     }
+    
 
 
 }
