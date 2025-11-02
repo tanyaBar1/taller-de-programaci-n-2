@@ -96,94 +96,97 @@ public class Piloto extends Persona {
 
     public void setPolePosition(int polePosition) {
 
-        if (polePosition >= 1 && polePosition <= 10) {
+        if (polePosition >= 1 && polePosition <= 20) {
 
             this.polePosition = polePosition;
+
         }
 
     }
  
 
-    public int calcularPosicion(int puesto) {
+    public void calcularPosicionPiloto(int puesto, boolean vueltaRapida) {
+
+        this.numeroCompetencia++;
 
         int puntos = 0; 
 
-        switch (polePosition) {
+        boolean fueraTop10 = puesto > 10; 
+
+
+        switch (puesto) {
 
             case 1:
 
-                this.polePosition = puesto; 
+                this.victorias++;
 
-                puntos = 25; 
+                this.podios++;
+
+                puntos = 24; 
 
                 break; 
 
+
             case 2:
 
-                this.polePosition = puesto; 
+                this.podios++;
 
-                puntos = 18; 
+                puntos = 17; 
 
                 break; 
                 
 
             case 3:
 
-                this.polePosition = puesto;
+                this.podios++;
                
-                puntos = 15; 
+                puntos = 14; 
 
                 break; 
 
 
             case 4:
 
-                this.polePosition = puesto;
-
-                puntos = 12; 
+                puntos = 11; 
 
                 break; 
 
 
             case 5:
 
-               this.polePosition = puesto; 
-
-                puntos = 10; 
+                puntos = 9; 
 
                 break; 
+
 
             case 6:
 
-                this.polePosition = puesto;
-
-                puntos = 8; 
+                puntos = 7; 
 
                 break; 
 
+
             case 7:
+ 
 
-                this.polePosition = puesto; 
-
-                puntos = 6; 
+                puntos = 5; 
 
                 break; 
 
 
             case 8:
 
-                this.polePosition = puesto; 
 
-                puntos = 4; 
+                puntos = 3; 
 
                 break; 
 
 
+
             case 9:
 
-                this.polePosition = puesto;
 
-                puntos = 2; 
+                puntos = 1; 
 
                 break; 
 
@@ -191,9 +194,7 @@ public class Piloto extends Persona {
 
             case 10:
 
-                this.polePosition = puesto; 
-
-                puntos = 1; 
+                puntos = 0; 
 
                 break; 
 
@@ -202,11 +203,21 @@ public class Piloto extends Persona {
 
                 puntos = 0; 
 
+                fueraTop10 = true; 
+
                 break; 
 
         }
+        
 
-        return puesto;
+        if (vueltaRapida && puesto <= 10) {
+
+            this.vueltasRapidas++;
+
+            puntos++; 
+
+        }
+
     } 
 
      
