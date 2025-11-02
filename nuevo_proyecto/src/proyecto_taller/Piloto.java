@@ -94,4 +94,120 @@ public class Piloto extends Persona {
     } 
 
 
+    public void setPolePosition(int polePosition) {
+
+        if (polePosition >= 1 && polePosition <= 10) {
+
+            this.polePosition = polePosition;
+        }
+
+    }
+ 
+
+    public int calcularPosicion(int puesto) {
+
+        int puntos = 0; 
+
+        switch (polePosition) {
+
+            case 1:
+
+                this.polePosition = puesto; 
+
+                puntos = 25; 
+
+                break; 
+
+            case 2:
+
+                this.polePosition = puesto; 
+
+                puntos = 18; 
+
+                break; 
+                
+
+            case 3:
+
+                this.polePosition = puesto;
+               
+                puntos = 15; 
+
+                break; 
+
+
+            case 4:
+
+                this.polePosition = puesto;
+
+                puntos = 12; 
+
+                break; 
+
+
+            case 5:
+
+               this.polePosition = puesto; 
+
+                puntos = 10; 
+
+                break; 
+
+            case 6:
+
+                this.polePosition = puesto;
+
+                puntos = 8; 
+
+                break; 
+
+            case 7:
+
+                this.polePosition = puesto; 
+
+                puntos = 6; 
+
+                break; 
+
+
+            case 8:
+
+                this.polePosition = puesto; 
+
+                puntos = 4; 
+
+                break; 
+
+
+            case 9:
+
+                this.polePosition = puesto;
+
+                puntos = 2; 
+
+                break; 
+
+
+
+            case 10:
+
+                this.polePosition = puesto; 
+
+                puntos = 1; 
+
+                break; 
+
+
+            default:
+
+                puntos = 0; 
+
+                break; 
+
+        }
+
+        return puesto;
+    } 
+
+     
 }

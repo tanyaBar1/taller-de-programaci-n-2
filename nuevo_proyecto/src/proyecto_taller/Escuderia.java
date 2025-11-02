@@ -30,11 +30,11 @@ public class Escuderia {
     }
 
 
-    public Escuderia(String nombre, Mecanico mecanico) {
+    public Escuderia(String nombre) {
 
         this.nombreEsc = nombre;
 
-        this.agregarMecanico(mecanico); 
+         
         
     }
 

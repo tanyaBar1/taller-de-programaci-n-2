@@ -27,7 +27,7 @@ public class Circuito {
 
         this.nombre = nombre;
 
-        this.longitud = 3; 
+        this.longitud = longitud; 
 
     }
 

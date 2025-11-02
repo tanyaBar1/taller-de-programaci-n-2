@@ -63,6 +63,33 @@ public class Carrera {
     }
 
 
+
+    public boolean existeCircuito() {
+
+        return this.circuito != null;
+    }
+    
+
+
+    public void setCircuito(Circuito circuito) {
+
+        if (existeCircuito() == true) {
+
+            System.out.println("El circuito se encuentra asignado.");
+
+        }
+
+        this.circuito = circuito; 
+
+    }
+
+
+    public Circuito getCircuito() {
+
+        return circuito; 
+    }
+
+
     public boolean existePais() {
 
         return this.pais != null;
@@ -70,7 +97,7 @@ public class Carrera {
     }
 
 
-    public void setPais(Pais pais){
+    public void setPais(Pais pais) {
 
         if (existePais() == true) {
 
@@ -82,4 +109,23 @@ public class Carrera {
         this.pais = pais;
 
     }
+ 
+    public void agregarParticipante(AutoPiloto autoPiloto){
+
+        for (AutoPiloto ap : autosPilotos){
+            if (ap.getFechaAsig().equals(autoPiloto.getFechaAsig())) {
+
+                System.out.print(" el participante ya se encuentra asignado a la carrera");
+                
+            }
+            
+            else {
+                
+                autosPilotos.add(autoPiloto);
+            }    
+    
+         }
+    }
+
+    
 }

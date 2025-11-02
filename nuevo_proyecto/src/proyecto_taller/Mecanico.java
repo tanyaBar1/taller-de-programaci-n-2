@@ -38,6 +38,16 @@ public class Mecanico extends Persona {
     }  
 
 
+    public Mecanico(String d, String n, String a, int anios, Especialidad e) {
+
+        super(d, n, a);  
+
+        this.aniosExperiencia = anios; 
+
+        this.especialidad = e; 
+    }
+
+
 
 
     public int getAnios() {

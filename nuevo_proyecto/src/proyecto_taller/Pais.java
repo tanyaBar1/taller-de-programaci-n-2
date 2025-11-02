@@ -139,6 +139,95 @@ public class Pais {
     }
   }
 
+   
+  public boolean existeCarrera(Carrera carrera) {
+
+    for (Carrera c : carreras) {
+      
+      if (c.getFecha().equals(carrera.getFecha()) && c.getHora().equals(carrera.getHora())) {
+
+        return true;
+
+      }
+
+    } 
+
+    return false;
+  }
+
+
+
+  public boolean disponibilidadCircuito(Carrera car) {
+    
+    for (Carrera  c : carreras) {
+
+      if (c.existeCircuito()) {
+
+        if (c.getCircuito().equals(car.getCircuito())) {
+       
+          return true;
+
+        }
+
+      }
+
+      else {
+
+        System.out.println("El circuito no existe.");
+      }
+
+    }
+
+    return false;
+    
+  }
+
+
+
+  public Carrera crearCarrera(String fecha, int numVueltas, String horario) {
+
+    return new Carrera(fecha, numVueltas, horario); 
+
+  } 
+
+
+  public void planificarCarrera(Carrera nuevaCarrera, String fecha, int numVueltas, String horario, Circuito circuito) {
+
+    if (!(this.existeCarrera(nuevaCarrera)) && !disponibilidadCircuito(nuevaCarrera)) {
+
+      nuevaCarrera = crearCarrera(fecha, numVueltas, horario); 
+
+      Circuito nuevoCircuito = new Circuito(); 
+
+      nuevaCarrera.setCircuito(circuito); 
+
+      carreras.add(nuevaCarrera); 
+
+    }
+
+    else if (existeCarrera(nuevaCarrera) && disponibilidadCircuito(nuevaCarrera)) {
+
+      System.out.println("No pueden haber dos carreras en un mismo circuito."); 
+
+    } 
+
+  }
+
+    
+  public void registrarParticipanteACarrera(Carrera carrera, AutoPiloto participante) {
+
+    carrera.agregarParticipante(participante);
+
+  }
+
+
+   
+
+
+
+}
+
+
+
 
   
-}
