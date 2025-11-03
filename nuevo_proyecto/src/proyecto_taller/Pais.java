@@ -39,7 +39,9 @@ public class Pais {
     this.id = id;
 
     this.descripcion = descripcion;
+
   }
+  
 
   public int getId() {
 
@@ -68,11 +70,11 @@ public class Pais {
   }
 
 
-  public boolean existeEscuderia(Escuderia esc) {
+  public boolean existeEscuderia(String nombre) {
 
     for (Escuderia e : escuderias) {
 
-      if (e.getNombreEsc().equals(esc.getNombreEsc())) {
+      if (e.getNombreEsc().equalsIgnoreCase(nombre)) {
 
         return true; 
       }
@@ -83,11 +85,14 @@ public class Pais {
   } 
 
 
-  public void agregarEscuderia(Escuderia escuderia, String nombre) {
+  public void agregarEscuderia(String nombre) {
 
-    if (existeEscuderia(escuderia) == true) {
+    if (existeEscuderia(nombre)) {
 
-      System.out.println("La escudería " + escuderia.getNombreEsc() + " ya existe."); 
+      System.out.println("La escudería ya existe."); 
+
+      return;
+
     }
 
     Escuderia nuevaEscuderia = new Escuderia(nombre); 
@@ -99,11 +104,11 @@ public class Pais {
 
 
 
-  public boolean existePersona(Persona per) {
+  public boolean existePersona(String dni) {
 
     for (Persona p : personas) {
 
-      if (p.getDni().equals(per.getDni())) {
+      if (p.getDni().equals(dni)) {
 
         return true; 
       }
@@ -115,28 +120,19 @@ public class Pais {
 
   
 
-  public Persona crearPersona(String dni, String nombre, String apellido) {
 
-    return new Persona(dni, nombre, apellido);
+  public void agregarPersonas(String dni, String nombre, String apellido) {
 
-  }
-
-
-  public void agregarPersonas(Persona p, String dni, String nombre, String apellido) {
-
-    if (existePersona(p) == true) {
+    if (existePersona(dni)) {
 
       System.out.println("La persona ya habita el país."); 
 
-    }
+      return;
 
-    else {
+    } 
 
-      Persona nuevaPersona = crearPersona(dni, nombre, apellido); 
+    personas.add(new Persona(dni, nombre, apellido)); 
 
-      personas.add(nuevaPersona); 
-
-    }
   }
 
    
@@ -144,7 +140,7 @@ public class Pais {
 
     for (Carrera c : carreras) {
       
-      if (c.getFecha().equals(carrera.getFecha()) && c.getHora().equals(carrera.getHora())) {
+      if (c.getFechaRealizacion().equals(carrera.getFechaRealizacion()) && c.getHoraRealizacion().equals(carrera.getHoraRealizacion())) {
 
         return true;
 
@@ -157,66 +153,80 @@ public class Pais {
 
 
 
-  public boolean disponibilidadCircuito(Carrera car) {
+  public boolean disponibilidadCircuito(Circuito circuito, String fecha) {
     
     for (Carrera  c : carreras) {
 
-      if (c.existeCircuito()) {
-
-        if (c.getCircuito().equals(car.getCircuito())) {
+      if (c.getCircuito().equals(circuito) && c.getFechaRealizacion().equals(fecha)) {
        
-          return true;
+        return false;
 
-        }
-
-      }
-
-      else {
-
-        System.out.println("El circuito no existe.");
       }
 
     }
 
-    return false;
+    return true;
     
   }
 
 
 
-  public Carrera crearCarrera(String fecha, int numVueltas, String horario) {
+  public void planificarCarrera(String fecha, int numVueltas, String horario, Circuito circuito) {
 
-    return new Carrera(fecha, numVueltas, horario); 
+    if (!disponibilidadCircuito(circuito, fecha)) {
 
-  } 
+      System.out.println("El circuito se realizará otra carrera en la fecha correspondiente.");
 
-
-  public void planificarCarrera(Carrera nuevaCarrera, String fecha, int numVueltas, String horario, Circuito circuito) {
-
-    if (!(this.existeCarrera(nuevaCarrera)) && !disponibilidadCircuito(nuevaCarrera)) {
-
-      nuevaCarrera = crearCarrera(fecha, numVueltas, horario); 
-
-      Circuito nuevoCircuito = new Circuito(); 
-
-      nuevaCarrera.setCircuito(circuito); 
-
-      carreras.add(nuevaCarrera); 
+      return;
 
     }
 
-    else if (existeCarrera(nuevaCarrera) && disponibilidadCircuito(nuevaCarrera)) {
+    Carrera nuevaCarrera = new Carrera(fecha, numVueltas, horario); 
 
-      System.out.println("No pueden haber dos carreras en un mismo circuito."); 
+    nuevaCarrera.setPais(this); 
 
-    } 
+    carreras.add(nuevaCarrera); 
+
+    circuito.getCarrera().add(nuevaCarrera); 
+
+    System.out.println("La carrera planificada se realizará en el circuito " + circuito.getNombreCircuito()); 
 
   }
 
     
   public void registrarParticipanteACarrera(Carrera carrera, AutoPiloto participante) {
 
-    carrera.agregarParticipante(participante);
+    if (carrera == null || participante == null) {
+
+      System.out.println("Datos inválidos o inexistentes."); 
+
+      return; 
+
+    }
+
+    for (AutoPiloto ap : carrera.getAutosPilotos()) {
+
+      if (ap.getAuto().equals(participante.getAuto())) {
+
+        System.out.println("El auto ya pertenece a otro participante."); 
+
+        return;
+
+      }
+
+      if (ap.getPiloto().equals(participante.getPiloto())) {
+
+        System.out.println("EL participante ya está registrado en la carrera."); 
+
+        return; 
+
+      }
+    }
+
+    carrera.getAutosPilotos().add(participante);
+
+    participante.getCarreras().add(carrera); 
+
 
   }
 

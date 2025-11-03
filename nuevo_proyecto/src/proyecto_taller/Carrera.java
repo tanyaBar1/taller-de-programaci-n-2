@@ -25,7 +25,8 @@ public class Carrera {
 
         horaRealizacion = " ";  
 
-        autosPilotos = new ArrayList<>(); 
+        this.autosPilotos = new ArrayList<>(); 
+        
 
     } 
 
@@ -40,7 +41,7 @@ public class Carrera {
     } 
 
 
-    public String getFecha() {
+    public String getFechaRealizacion() {
 
         return fechaRealizacion; 
     } 
@@ -50,16 +51,22 @@ public class Carrera {
         return numeroVueltas;
     }  
 
-    public String getHora() {
+    public String getHoraRealizacion() {
 
         return horaRealizacion; 
     } 
 
 
-    public Pais getPaisCar() {
+    public Pais getPaisCarrera() {
 
         return pais;
 
+    }
+
+
+    public ArrayList<AutoPiloto> getAutosPilotos() {
+
+        return autosPilotos;
     }
 
 
@@ -101,7 +108,7 @@ public class Carrera {
 
         if (existePais() == true) {
 
-            System.out.println("Hay un país asignado: " + this.getPaisCar()); 
+            System.out.println("Hay un país asignado: " + this.getPaisCarrera()); 
 
             
         }
@@ -112,8 +119,9 @@ public class Carrera {
  
     public void agregarParticipante(AutoPiloto autoPiloto){
 
-        for (AutoPiloto ap : autosPilotos){
-            if (ap.getFechaAsig().equals(autoPiloto.getFechaAsig())) {
+        for (AutoPiloto ap : autosPilotos) {
+
+            if (ap.getFechaAsignacion().equals(autoPiloto.getFechaAsignacion())) {
 
                 System.out.print(" el participante ya se encuentra asignado a la carrera");
                 
@@ -124,7 +132,13 @@ public class Carrera {
                 autosPilotos.add(autoPiloto);
             }    
     
-         }
+        }
+    }
+
+
+    public void verificarResultados() {
+
+
     }
 
     

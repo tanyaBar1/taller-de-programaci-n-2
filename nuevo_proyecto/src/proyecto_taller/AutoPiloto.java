@@ -17,21 +17,19 @@ public class AutoPiloto {
 
         fechaAsignacion = " "; 
 
-        carreras = new ArrayList<>();
+        this.carreras = new ArrayList<>();
 
     } 
 
 
     public AutoPiloto(String fecha) {
 
-        this.fechaAsignacion = fecha;
-
-         
+        this.fechaAsignacion = fecha;   
 
     } 
 
 
-    public String getFechaAsig() {
+    public String getFechaAsignacion() {
 
         return fechaAsignacion; 
     }
@@ -60,61 +58,71 @@ public class AutoPiloto {
         this.piloto = piloto;
     }
 
+
+    public ArrayList<Carrera> getCarreras() {
+
+        return carreras;
+
+    }
+
     
-    public boolean verificarAuto(Auto auto) {
+    public boolean verificarAuto(String modelo, String motor) {
 
-        if (auto.getEscuderia().existeAuto(auto)) {
+       return auto.getEscuderia().existeAuto(modelo, motor);
 
-            return true;
-
-        }
-
-        return false; 
     }
 
     
     public boolean verificarContratoPiloto(PilotoEscuderia pilotoEsc, Escuderia escuderia) {
         
-        if (pilotoEsc.getEscuderia() == escuderia) {
-
-            return true;
-        }
-        
-        return false;
+        return pilotoEsc.getEscuderia().equals(escuderia);
 
     }
 
 
 
 
-    public void asignarAutoPiloto(Auto auto, PilotoEscuderia pilotoEsc, Escuderia escuderia, Piloto piloto, String fecha) {
+    public void asignarAutoPiloto(String modelo, String motor, PilotoEscuderia pilotoEsc, Escuderia escuderia, Piloto piloto, Auto auto, String fecha) {
 
-        if (verificarAuto(auto) && verificarContratoPiloto(pilotoEsc, escuderia) && this.fechaAsignacion.equals(null)) {
+        if (!verificarAuto(modelo, motor)) {
 
-            this.auto = auto;
+            System.out.println("El auto no está registrado en la escudería."); 
 
-            this.piloto = piloto; 
-            
-            this.fechaAsignacion = fecha;
-        
-        
-        } else {
-
-            System.out.println("El auto o el piloto no están registrados en la escudería. O ya hay un contrato vigente.");
-
+            return;
         }
+
+        if (!verificarContratoPiloto(pilotoEsc, escuderia)) {
+
+            System.out.println("El piloto no tiene contrato con la escudería."); 
+
+            return; 
+        }
+
+        if (this.fechaAsignacion != null && !this.fechaAsignacion.isEmpty()) {
+
+            System.out.println("Existe un contrato auto-piloto.");
+
+            return;
+        }
+
+        this.auto = auto;
+
+        this.piloto = piloto;
+
+        this.fechaAsignacion = fecha;
+
+
+        piloto.getPilotoAuto().add(this);
+
+        auto.getAutoPiloto().add(this); 
 
     }
-    
 
-    public boolean verificarContratoAutoPiloto(Auto auto, Piloto piloto, String fechaAsignacion){
 
-        if(this.auto == auto && this.piloto == piloto && this.fechaAsignacion.equals(fechaAsignacion)){
 
-            return true;
-        }
+    public boolean verificarContratoAutoPiloto(Auto auto, Piloto piloto, String fechaAsignacion) {
          
-        return false;
+        return this.auto.equals(auto) && this.piloto.equals(piloto) && this.fechaAsignacion.equals(fechaAsignacion);
 
     }
 

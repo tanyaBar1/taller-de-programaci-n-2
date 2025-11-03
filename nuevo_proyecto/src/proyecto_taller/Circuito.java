@@ -31,13 +31,13 @@ public class Circuito {
 
     }
 
-    public String getNombreCir() {
+    public String getNombreCircuito() {
        
         return nombre;
     }
 
 
-    public void setNombreCir(String nombre) {
+    public void setNombreCircuito(String nombre) {
        
         this.nombre = nombre;
     }
@@ -54,6 +54,13 @@ public class Circuito {
 
       this.longitud = longitud;
 
+    }
+
+
+    public ArrayList<Carrera> getCarrera() {
+
+        return carreras; 
+        
     }
 
     

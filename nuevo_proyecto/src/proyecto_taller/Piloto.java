@@ -16,7 +16,7 @@ public class Piloto extends Persona {
 
     private ArrayList<PilotoEscuderia> pilotoEscuderia; 
 
-    private ArrayList<AutoPiloto> autoPiloto;
+    private ArrayList<AutoPiloto> pilotoAuto;
 
     
     public Piloto() {
@@ -33,9 +33,9 @@ public class Piloto extends Persona {
 
         podios = 0; 
 
-        pilotoEscuderia = new ArrayList<>(); 
+        this.pilotoEscuderia = new ArrayList<>(); 
 
-        autoPiloto = new ArrayList<>();
+        this.pilotoAuto = new ArrayList<>();
 
     } 
 
@@ -92,6 +92,18 @@ public class Piloto extends Persona {
 
         return podios; 
     } 
+
+
+    public ArrayList<PilotoEscuderia> getPilotoEscuderia() {
+
+        return pilotoEscuderia;
+    }
+
+
+    public ArrayList<AutoPiloto> getPilotoAuto() {
+
+        return pilotoAuto;
+    }
 
 
     public void setPolePosition(int polePosition) {

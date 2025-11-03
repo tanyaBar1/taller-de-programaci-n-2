@@ -1,14 +1,12 @@
 package proyecto_taller;
 
-import java.util.List;
-
 import java.util.ArrayList;
 
 public class Escuderia {
    
     private String nombreEsc;
 
-    private List<Auto> autos;
+    private ArrayList<Auto> autos;
 
     private Pais pais;
 
@@ -19,13 +17,13 @@ public class Escuderia {
 
     public Escuderia() {
 
-        nombreEsc = "";
+        this.nombreEsc = "";
 
-        contratoEscuderia = new ArrayList<>(); 
+        this.contratoEscuderia = new ArrayList<>(); 
 
-        autos = new ArrayList<>(); 
+        this.autos = new ArrayList<>(); 
 
-        mecanicos = new ArrayList<>(); 
+        this.mecanicos = new ArrayList<>(); 
 
     }
 
@@ -62,23 +60,18 @@ public class Escuderia {
     }
 
 
-    public void setPaisEsc(Pais pais){
+    public void setPaisEsc(Pais pais) {
 
-        if (existePais() == true) {
+        if (existePais()) {
 
-            System.out.println("Hay un país asignado: " + this.getPaisEsc()); 
+            System.out.println("Hay un país asignado. No se puede cambiar."); 
 
-            
+            return;
+
         }
 
         this.pais = pais;
 
-    } 
-
-
-    public Piloto crearPiloto(String dni, String nombre, String apellido) {
-
-        return new Piloto(dni, nombre, apellido); 
     }
 
 
@@ -90,8 +83,6 @@ public class Escuderia {
             if (p.getPiloto().getDni().equals(piloto.getDni())) {
 
                 return true; 
-
-
             }
 
         }
@@ -100,31 +91,31 @@ public class Escuderia {
     }
 
 
-    public void agregarPiloto(Piloto p, String dni, String nombre, String apellido, String fechaInicio, String fechaFin) {
+    public void agregarPiloto(Piloto piloto, String fechaInicio, String fechaFin) {
 
-        if (pilotoInscrito(p) == true) {
+        if (pilotoInscrito(piloto)) {
 
             System.out.println("El piloto está inscrito en la escudería.");
 
+            return;
+
         } 
 
-        else {
+        PilotoEscuderia nuevoContrato = new PilotoEscuderia(piloto, this, fechaInicio, fechaFin);
 
-            Piloto piloto = crearPiloto(dni, nombre, apellido); 
+        contratoEscuderia.add(nuevoContrato);
 
-            PilotoEscuderia nuevoPiloto = new PilotoEscuderia(piloto, this, fechaInicio, fechaFin);
-
-            contratoEscuderia.add(nuevoPiloto);
-        }
+        piloto.getPilotoEscuderia().add(nuevoContrato);
+        
 
     } 
 
 
-    public boolean existeAuto(Auto auto) {
+    public boolean existeAuto(String modelo, String motor) {
 
         for (Auto a : autos) {
 
-            if (a.getModelo().equals(auto.getModelo()) && a.getMotor().equals(auto.getMotor())) { 
+            if (a.getModelo().equals(modelo) && a.getMotor().equals(motor)) { 
 
                 return true; 
 
@@ -136,33 +127,31 @@ public class Escuderia {
     } 
 
 
-    public void agregarAutos(Auto auto, String modelo, String motor) {
+    public void agregarAutos(String modelo, String motor) {
 
-        if (existeAuto(auto) == true) {
+        if (existeAuto(modelo, motor)) {
 
             System.out.println("El auto se encuentra registrado en la escudería."); 
 
+            return;
 
         } 
 
-        else {
+        Auto nuevoAuto = new Auto(modelo, motor); 
 
-            Auto nuevoAuto = new Auto(modelo, motor); 
+        nuevoAuto.setEscuderia(this); 
 
-            nuevoAuto.setEscuderia(this); 
-
-            autos.add(nuevoAuto); 
+        autos.add(nuevoAuto); 
             
             
-        }
     } 
 
 
-    public boolean existeMecanico(Mecanico mecanico) {
+    public boolean existeMecanico(String dni) {
 
         for (Mecanico m : mecanicos) {
 
-            if (m.getDni().equals(mecanico.getDni())) {
+            if (m.getDni().equals(dni)) {
 
                 return true;
             }
@@ -173,21 +162,21 @@ public class Escuderia {
     }
 
 
-    public void agregarMecanico(Mecanico mecanico, String dni, String nombre, String apellido, int aniosExperiencia, Especialidad especialidad) {
+    public void agregarMecanico(String dni, String nombre, String apellido, int aniosExperiencia, Especialidad especialidad) {
 
-        if (existeMecanico(mecanico) == true) {
+        if (existeMecanico(dni)) {
 
             System.out.println("El mecánico ya está registrado."); 
 
+            return;
+
         } 
 
-        else {
+        Mecanico nuevoMecanico = new Mecanico(dni, nombre, apellido, aniosExperiencia, especialidad); 
 
-            Mecanico nuevoMecanico = new Mecanico(dni, nombre, apellido, aniosExperiencia, especialidad); 
+        mecanicos.add(nuevoMecanico); 
 
-            mecanicos.add(nuevoMecanico); 
 
-        }
     }
     
 

@@ -19,7 +19,7 @@ public class Auto {
 
        motor = "";
 
-       autoPiloto = new ArrayList<>();
+       this.autoPiloto = new ArrayList<>();
 
     }
 
@@ -65,6 +65,12 @@ public class Auto {
 
         return escuderia;
 
+    }
+
+
+    public ArrayList<AutoPiloto> getAutoPiloto() {
+
+        return autoPiloto;
     }
 
 
