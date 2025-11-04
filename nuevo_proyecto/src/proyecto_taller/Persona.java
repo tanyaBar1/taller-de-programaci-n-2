@@ -12,11 +12,11 @@ public class Persona {
 
     public Persona() {
 
-        dni = " ";
+        dni = "";
 
-        nombrePer = " "; 
+        nombrePer = ""; 
 
-        apellido = " "; 
+        apellido = ""; 
 
     } 
 
@@ -38,7 +38,7 @@ public class Persona {
         return dni;
     }
 
-    public String getNombrePer() {
+    public String getNombrePersona() {
 
         return nombrePer; 
     } 
@@ -49,7 +49,7 @@ public class Persona {
     } 
 
 
-    public Pais getPaisPer() {
+    public Pais getPaisPersona() {
 
         return pais;
     }
@@ -60,7 +60,7 @@ public class Persona {
         this.dni = dni; 
     }
 
-    public void setNombrePer(String nombre) {
+    public void setNombrePersona(String nombre) {
 
         this.nombrePer = nombre;
     }
@@ -77,13 +77,13 @@ public class Persona {
     }
 
 
-    public void setPaisPer(Pais pais){
+    public void setPaisPersona(Pais pais) {
 
-        if (existePais() == true) {
+        if (existePais()) {
 
-            System.out.println("Hay un país asignado: " + this.getPaisPer()); 
+            System.out.println("Hay un país asignado: " + this.getPaisPersona()); 
 
-            
+            return;  
         }
 
         this.pais = pais;

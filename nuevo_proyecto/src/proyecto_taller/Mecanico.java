@@ -19,7 +19,7 @@ public class Mecanico extends Persona {
 
         especialidad = null;
 
-        escuderias = new ArrayList<>();
+        this.escuderias = new ArrayList<>();
 
 
     } 
@@ -33,7 +33,8 @@ public class Mecanico extends Persona {
 
         this.especialidad = e; 
 
-        this.agregarEscuderia(escuderia); 
+        this.agregarEscuderia(escuderia);
+ 
 
     }  
 
@@ -67,7 +68,7 @@ public class Mecanico extends Persona {
 
         for (Escuderia e : escuderias) {
 
-            if (e.getNombreEsc().equals(esc.getNombreEsc())) {
+            if (e.getNombreEscuderia().equalsIgnoreCase(esc.getNombreEscuderia())) {
 
                 return true; 
             }
@@ -80,16 +81,23 @@ public class Mecanico extends Persona {
 
     public void agregarEscuderia(Escuderia escuderia) {
 
-        if (existeEscuderia(escuderia) == true) {
+        if (escuderia == null) {
+
+            System.out.println("Es necesario que exista una escudería.");
+
+            return;
+        }
+
+        if (existeEscuderia(escuderia)) {
 
             System.out.println("La escudería ya existe.");
 
+            return;
+
         } 
 
-        else {
-
-            escuderias.add(escuderia); 
-        }
+        escuderias.add(escuderia); 
+    
     }
 
 }

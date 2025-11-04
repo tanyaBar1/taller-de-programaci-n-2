@@ -74,7 +74,7 @@ public class Pais {
 
     for (Escuderia e : escuderias) {
 
-      if (e.getNombreEsc().equalsIgnoreCase(nombre)) {
+      if (e.getNombreEscuderia().equalsIgnoreCase(nombre)) {
 
         return true; 
       }
@@ -97,7 +97,7 @@ public class Pais {
 
     Escuderia nuevaEscuderia = new Escuderia(nombre); 
 
-    nuevaEscuderia.setPaisEsc(this); 
+    nuevaEscuderia.setPaisEscuderia(this); 
 
     escuderias.add(nuevaEscuderia); 
   }

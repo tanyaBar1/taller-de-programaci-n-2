@@ -76,9 +76,11 @@ public class Auto {
 
     public void setEscuderia(Escuderia esc) {
 
-        if (existeEscuderia() == true) {
+        if (existeEscuderia()) {
 
           System.out.println("La escudería está asignada."); 
+
+          return;
         
         }
 

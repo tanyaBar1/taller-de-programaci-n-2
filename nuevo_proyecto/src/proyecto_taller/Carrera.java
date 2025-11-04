@@ -30,15 +30,27 @@ public class Carrera {
 
     } 
 
-    public Carrera(String fecha, int vueltas, String hora) {
+    public Carrera(String fecha, int vueltas, String hora, AutoPiloto autoPiloto) {
 
         this.fechaRealizacion = fecha; 
 
         this.numeroVueltas = vueltas; 
 
-        this.horaRealizacion = hora;  
+        this.horaRealizacion = hora; 
+        
+        this.agregarParticipante(autoPiloto);
+    
 
     } 
+
+    public Carrera(String fecha, int vueltas, String hora) {
+
+        this.fechaRealizacion = fecha;
+
+        this.numeroVueltas = vueltas;
+
+        this.horaRealizacion = hora;
+    }
 
 
     public String getFechaRealizacion() {
@@ -80,9 +92,11 @@ public class Carrera {
 
     public void setCircuito(Circuito circuito) {
 
-        if (existeCircuito() == true) {
+        if (existeCircuito()) {
 
             System.out.println("El circuito se encuentra asignado.");
+
+            return; 
 
         }
 
@@ -106,40 +120,51 @@ public class Carrera {
 
     public void setPais(Pais pais) {
 
-        if (existePais() == true) {
+        if (existePais()) {
 
-            System.out.println("Hay un país asignado: " + this.getPaisCarrera()); 
+            System.out.println("Hay un país asignado."); 
 
-            
+            return;  
         }
 
         this.pais = pais;
 
     }
+
  
-    public void agregarParticipante(AutoPiloto autoPiloto){
+    public void agregarParticipante(AutoPiloto autoPiloto) {
+
+        if (autoPiloto == null) {
+
+          System.out.println("Datos inválidos.");
+
+          return;
+
+        }
 
         for (AutoPiloto ap : autosPilotos) {
 
-            if (ap.getFechaAsignacion().equals(autoPiloto.getFechaAsignacion())) {
+            if (ap.getAuto().equals(autoPiloto.getAuto())) {
 
-                System.out.print(" el participante ya se encuentra asignado a la carrera");
-                
+               System.out.println("El auto ya está asignado a otro piloto en esta carrera.");
+               
+               return;
+
             }
-            
-            else {
-                
-                autosPilotos.add(autoPiloto);
-            }    
-    
+
+            if (ap.getPiloto().equals(autoPiloto.getPiloto())) {
+
+                System.out.println("El piloto está participando en la carrera."); 
+
+                return;
+            }
         }
+
+        autosPilotos.add(autoPiloto); 
+
+       
     }
 
-
-    public void verificarResultados() {
-
-
-    }
 
     
 }

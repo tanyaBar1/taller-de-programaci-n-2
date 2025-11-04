@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Escuderia {
    
-    private String nombreEsc;
+    private String nombreEscuderia;
 
     private ArrayList<Auto> autos;
 
@@ -17,7 +17,7 @@ public class Escuderia {
 
     public Escuderia() {
 
-        this.nombreEsc = "";
+        this.nombreEscuderia = "";
 
         this.contratoEscuderia = new ArrayList<>(); 
 
@@ -27,27 +27,31 @@ public class Escuderia {
 
     }
 
+    public Escuderia(String nombreEscuderia) {
 
-    public Escuderia(String nombre) {
-
-        this.nombreEsc = nombre;
-
-         
-        
-    }
-
-    public String getNombreEsc() {
-
-        return nombreEsc;
-    }
-
-    public void setNombre(String nombre) {
-
-        this.nombreEsc = nombre;
+        this.nombreEscuderia = nombreEscuderia; 
     }
 
 
-    public Pais getPaisEsc() {
+    public Escuderia(String dni, String nombre, String apellido, int anios, Especialidad especialidad) {
+
+        this.agregarMecanico(dni, nombre, apellido, anios, especialidad);
+  
+    }
+
+
+    public String getNombreEscuderia() {
+
+        return nombreEscuderia;
+    }
+
+    public void setNombreEscuderia(String nombre) {
+
+        this.nombreEscuderia = nombre;
+    }
+
+
+    public Pais getPaisEscuderia() {
 
         return pais;
     }
@@ -60,7 +64,7 @@ public class Escuderia {
     }
 
 
-    public void setPaisEsc(Pais pais) {
+    public void setPaisEscuderia(Pais pais) {
 
         if (existePais()) {
 
@@ -93,21 +97,32 @@ public class Escuderia {
 
     public void agregarPiloto(Piloto piloto, String fechaInicio, String fechaFin) {
 
+        PilotoEscuderia nuevoContrato = new PilotoEscuderia(piloto, this, fechaInicio, fechaFin);
+
         if (pilotoInscrito(piloto)) {
 
             System.out.println("El piloto está inscrito en la escudería.");
 
             return;
 
-        } 
+        }
 
-        PilotoEscuderia nuevoContrato = new PilotoEscuderia(piloto, this, fechaInicio, fechaFin);
+
+        for (PilotoEscuderia pe : contratoEscuderia) {
+
+            if (pe.contratosSuperpuestos(nuevoContrato)) {
+
+                System.out.println("El piloto tiene un contrato que se superpone en ese período.");
+
+                return;
+            }
+
+        }
 
         contratoEscuderia.add(nuevoContrato);
 
         piloto.getPilotoEscuderia().add(nuevoContrato);
         
-
     } 
 
 

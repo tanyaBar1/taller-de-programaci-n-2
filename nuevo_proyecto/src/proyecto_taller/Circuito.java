@@ -19,7 +19,7 @@ public class Circuito {
 
         longitud = 3;
 
-        carreras = new ArrayList<>(); 
+        this.carreras = new ArrayList<>(); 
 
     }
 
@@ -72,18 +72,19 @@ public class Circuito {
     }
 
 
-    public Pais getPaisCir() {
+    public Pais getPaisCircuito() {
 
         return pais; 
     }
 
 
-    public void setPais(Pais pais){
+    public void setPais(Pais pais) {
 
-        if (existePais() == true) {
+        if (existePais()) {
 
-            System.out.println("Hay un país asignado: " + this.getPaisCir()); 
+            System.out.println("Hay un país asignado."); 
 
+            return;
             
         }
 
