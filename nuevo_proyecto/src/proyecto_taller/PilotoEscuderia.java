@@ -1,6 +1,6 @@
 package proyecto_taller;
 
-public class PilotoEscuderia implements Comparable<PilotoEscuderia> {
+public class PilotoEscuderia {
       
     private String desdeFecha;
 
@@ -16,6 +16,10 @@ public class PilotoEscuderia implements Comparable<PilotoEscuderia> {
         desdeFecha = "";
 
         hastaFecha = "";
+
+        piloto = null;
+
+        escuderia = null;
 
     }
     
@@ -84,26 +88,14 @@ public class PilotoEscuderia implements Comparable<PilotoEscuderia> {
         this.escuderia = escuderia;
     }  
     
-    
-    @Override
-
-    public int compareTo(PilotoEscuderia otro) {
-
-        int inicioContrato = this.desdeFecha.compareTo(otro.getDesdeFecha()); 
-
-        if (inicioContrato != 0) {
-
-            return inicioContrato;
-        }
-
-        return this.hastaFecha.compareTo(otro.getHastaFecha()); 
-
-    }
-
 
     public boolean contratosSuperpuestos(PilotoEscuderia otro) {
 
-        return (this.desdeFecha.compareTo(otro.getHastaFecha()) <= 0) && (otro.getDesdeFecha().compareTo(this.hastaFecha) <= 0);
+        boolean empiezaAntesDeTerminarOtro = this.desdeFecha.compareTo(otro.getHastaFecha()) <= 0;
+
+        boolean empiezaAntesDeTerminarEsteContrato = otro.getDesdeFecha().compareTo(this.hastaFecha) <= 0;
+
+        return empiezaAntesDeTerminarOtro && empiezaAntesDeTerminarEsteContrato;
     }
      
 

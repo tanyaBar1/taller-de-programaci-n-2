@@ -19,23 +19,39 @@ public class Escuderia {
 
         this.nombreEscuderia = "";
 
-        this.contratoEscuderia = new ArrayList<>(); 
+        contratoEscuderia = new ArrayList<>(); 
 
-        this.autos = new ArrayList<>(); 
+        autos = new ArrayList<>(); 
 
-        this.mecanicos = new ArrayList<>(); 
+        mecanicos = new ArrayList<>();
+        
+        pais = null;
+
 
     }
+    
 
     public Escuderia(String nombreEscuderia) {
 
         this.nombreEscuderia = nombreEscuderia; 
+
+        contratoEscuderia = new ArrayList<>(); 
+
+        autos = new ArrayList<>(); 
+
+        mecanicos = new ArrayList<>(); 
     }
 
 
     public Escuderia(String dni, String nombre, String apellido, int anios, Especialidad especialidad) {
 
         this.agregarMecanico(dni, nombre, apellido, anios, especialidad);
+
+        contratoEscuderia = new ArrayList<>(); 
+
+        autos = new ArrayList<>(); 
+
+        mecanicos = new ArrayList<>();
   
     }
 
@@ -54,6 +70,27 @@ public class Escuderia {
     public Pais getPaisEscuderia() {
 
         return pais;
+    }
+
+
+    public ArrayList<Auto> getAutosEscuderia() {
+
+        return autos;
+
+    }
+
+
+    public ArrayList<Mecanico> getMecanicos() {
+
+        return mecanicos;
+
+    }
+
+
+    public ArrayList<PilotoEscuderia> getContratoEscuderia() {
+
+        return contratoEscuderia; 
+
     }
     
 
@@ -96,6 +133,24 @@ public class Escuderia {
 
 
     public void agregarPiloto(Piloto piloto, String fechaInicio, String fechaFin) {
+
+        if (fechaInicio == null || fechaInicio.isEmpty() || fechaFin == null || fechaFin.isEmpty()) {
+
+           System.out.println("Las fechas de inicio o fin no pueden ser vacías.");
+
+           return;
+           
+        }
+
+        if (fechaInicio.compareTo(fechaFin) > 0) {
+
+           System.out.println("La fecha de inicio no puede ser posterior a la fecha de fin.");
+
+           return;
+
+        }
+
+
 
         PilotoEscuderia nuevoContrato = new PilotoEscuderia(piloto, this, fechaInicio, fechaFin);
 
@@ -157,7 +212,8 @@ public class Escuderia {
         nuevoAuto.setEscuderia(this); 
 
         autos.add(nuevoAuto); 
-            
+        
+        System.out.println("Auto agregado exitosamente a la escudería.");
             
     } 
 
@@ -188,6 +244,8 @@ public class Escuderia {
         } 
 
         Mecanico nuevoMecanico = new Mecanico(dni, nombre, apellido, aniosExperiencia, especialidad); 
+        
+        nuevoMecanico.agregarEscuderia(this);
 
         mecanicos.add(nuevoMecanico); 
 

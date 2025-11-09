@@ -2,7 +2,7 @@ package proyecto_taller;
 
 import java.util.ArrayList; 
 
-public class Piloto extends Persona {
+public class Piloto extends Persona implements Comparable<Piloto> {
 
     private int numeroCompetencia; 
 
@@ -13,6 +13,8 @@ public class Piloto extends Persona {
     private int vueltasRapidas; 
 
     private int podios; 
+
+    private int puntosAcumulados; 
 
     private ArrayList<PilotoEscuderia> pilotoEscuderia; 
 
@@ -33,9 +35,11 @@ public class Piloto extends Persona {
 
         podios = 0; 
 
-        this.pilotoEscuderia = new ArrayList<>(); 
+        puntosAcumulados = 0;
 
-        this.pilotoAuto = new ArrayList<>();
+        pilotoEscuderia = new ArrayList<>(); 
+
+        pilotoAuto = new ArrayList<>();
 
     } 
 
@@ -54,13 +58,42 @@ public class Piloto extends Persona {
 
         this.podios = podios; 
 
+        pilotoEscuderia = new ArrayList<>();
+
+        pilotoAuto = new ArrayList<>();
+
     } 
 
 
     public Piloto(String dni, String nombre, String apellido) {
 
         super(dni, nombre, apellido);
+
+        pilotoEscuderia = new ArrayList<>();
+
+        pilotoAuto = new ArrayList<>();
         
+    }
+
+
+    public String nombrePiloto() {
+
+        return getNombrePersona(); 
+
+    }
+
+
+    public String apellidoPiloto() {
+
+        return getApellidoPersona(); 
+
+    }
+
+
+    public String getDniPiloto() {
+
+        return getDni();
+
     }
 
 
@@ -94,6 +127,108 @@ public class Piloto extends Persona {
     } 
 
 
+    public int getPuntosAcumulados() {
+
+        return puntosAcumulados;
+
+    }
+
+
+    public void agregarContratoEscuderia(Escuderia escuderia, String fechaInicio, String fechaFin) {
+
+        if (fechaInicio == null || fechaInicio.isEmpty() || fechaFin == null || fechaFin.isEmpty()) {
+
+           System.out.println("Las fechas de inicio o fin no pueden ser vacías.");
+
+           return;
+
+        }
+
+        if (fechaInicio.compareTo(fechaFin) > 0) {
+
+           System.out.println("La fecha de inicio no puede ser posterior a la fecha de fin.");
+           
+           return;
+
+        }
+
+
+        PilotoEscuderia nuevoContrato = new PilotoEscuderia(this, escuderia, fechaInicio, fechaFin);
+
+        if (escuderia.pilotoInscrito(this)) {
+
+           System.out.println("El piloto ya está inscrito en esta escudería.");
+
+           return;
+
+        }
+
+        for (PilotoEscuderia contratoExistente : this.pilotoEscuderia) {
+
+            if (contratoExistente.getEscuderia().equals(escuderia) && contratoExistente.contratosSuperpuestos(nuevoContrato)) {
+
+               System.out.println("El piloto ya tiene un contrato que se superpone con esta escudería.");
+
+                return;
+            
+            }
+
+        }
+
+        this.pilotoEscuderia.add(nuevoContrato);
+
+        escuderia.getContratoEscuderia().add(nuevoContrato); 
+
+        System.out.println("Contrato agregado con éxito.");
+
+    }
+
+
+    public void asignarAuto(Auto auto, String fechaAsignacion) {
+
+        if (auto.pilotoAsignado(this)) {
+
+            System.out.println("Este piloto ya está asignado a este auto.");
+
+            return;
+        }
+
+        for (AutoPiloto ap : auto.getAutoPiloto()) {
+
+            if (ap.getFechaAsignacion().equals(fechaAsignacion)) {
+
+                System.out.println("El piloto ya tiene asignado otro auto en esa fecha.");
+
+                return;
+
+            }
+            
+        }
+
+        AutoPiloto nuevoAutoPiloto = new AutoPiloto(fechaAsignacion);
+
+        nuevoAutoPiloto.setAuto(auto);
+
+        nuevoAutoPiloto.setPiloto(this);
+
+        pilotoAuto.add(nuevoAutoPiloto);
+
+        auto.getAutoPiloto().add(nuevoAutoPiloto);
+
+        System.out.println("El piloto ha sido asignado al auto.");
+
+    }
+    
+
+
+
+    public void sumarPuntos(int puntos) {
+
+        this.puntosAcumulados += puntos;
+
+    }
+
+
     public ArrayList<PilotoEscuderia> getPilotoEscuderia() {
 
         return pilotoEscuderia;
@@ -106,129 +241,49 @@ public class Piloto extends Persona {
     }
 
 
-    public void setPolePosition(int polePosition) {
+    public void incrementarPolePosition() {
 
-        if (polePosition >= 0) {
+        polePosition++;
 
-            this.polePosition = polePosition;
+    }
 
-        }
+
+    public void incrementarNumeroCompetencias() {
+
+        numeroCompetencia++;
+    }
+
+
+    public void incrementarVueltasRapidas() {
+
+        vueltasRapidas++;
+    }
+
+
+    public void incrementarVictorias() {
+
+        victorias++;
+    }
+
+
+    public void incrementarPodios() {
+
+        podios++;
+
+    }
+
+
+    @Override
+
+
+    public int compareTo(Piloto otro) {
+
+        return Integer.compare(otro.getPuntosAcumulados(), this.getPuntosAcumulados());
 
     }
  
 
-    public int calcularPosicionPiloto(int puesto, boolean vueltaRapida) {
-
-        this.numeroCompetencia++;
-
-        int puntos = 0; 
-
-
-        switch (puesto) {
-
-            case 1:
-
-                this.victorias++;
-
-                this.podios++;
-
-                puntos = 25; 
-
-                break; 
-
-
-            case 2:
-
-                this.podios++;
-
-                puntos = 18; 
-
-                break; 
-                
-
-            case 3:
-
-                this.podios++;
-               
-                puntos = 15; 
-
-                break; 
-
-
-            case 4:
-
-                puntos = 12; 
-
-                break; 
-
-
-            case 5:
-
-                puntos = 10; 
-
-                break; 
-
-
-            case 6:
-
-                puntos = 8; 
-
-                break; 
-
-
-            case 7:
- 
-
-                puntos = 6; 
-
-                break; 
-
-
-            case 8:
-
-
-                puntos = 4; 
-
-                break; 
-
-
-
-            case 9:
-
-
-                puntos = 2; 
-
-                break; 
-
-
-
-            case 10:
-
-                puntos = 1; 
-
-                break; 
-
-
-            default:
-
-                puntos = 0;
-
-                break; 
-
-        }
-        
-
-        if (vueltaRapida && puesto <= 10) {
-
-            this.vueltasRapidas++;
-
-            puntos += 1; 
-
-        }
-
-        return puntos;
-
-    }   
+       
 
      
 }

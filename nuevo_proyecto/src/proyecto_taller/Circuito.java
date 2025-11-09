@@ -19,15 +19,20 @@ public class Circuito {
 
         longitud = 3;
 
-        this.carreras = new ArrayList<>(); 
+        carreras = new ArrayList<>(); 
+
+        pais = null;
 
     }
+    
 
-     public Circuito(String nombre, int longitud) {
+    public Circuito(String nombre, int longitud) {
 
         this.nombre = nombre;
 
         this.longitud = longitud; 
+
+        carreras = new ArrayList<>(); 
 
     }
 
@@ -78,7 +83,7 @@ public class Circuito {
     }
 
 
-    public void setPais(Pais pais) {
+    public void setPaisCircuito(Pais pais) {
 
         if (existePais()) {
 

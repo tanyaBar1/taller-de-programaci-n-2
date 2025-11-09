@@ -8,7 +8,7 @@ public class Mecanico extends Persona {
 
     private Especialidad especialidad; 
 
-    private ArrayList<Escuderia> escuderias; 
+    private ArrayList<Escuderia> escuderiasMecanicos; 
 
 
     public Mecanico() {
@@ -19,8 +19,9 @@ public class Mecanico extends Persona {
 
         especialidad = null;
 
-        this.escuderias = new ArrayList<>();
+        escuderiasMecanicos = new ArrayList<>();
 
+        especialidad = null;
 
     } 
 
@@ -34,6 +35,8 @@ public class Mecanico extends Persona {
         this.especialidad = e; 
 
         this.agregarEscuderia(escuderia);
+
+        escuderiasMecanicos = new ArrayList<>();
  
 
     }  
@@ -46,12 +49,15 @@ public class Mecanico extends Persona {
         this.aniosExperiencia = anios; 
 
         this.especialidad = e; 
+
+        escuderiasMecanicos = new ArrayList<>();
+
     }
 
 
 
 
-    public int getAnios() {
+    public int getAniosExperiencia() {
 
         return aniosExperiencia; 
 
@@ -64,9 +70,35 @@ public class Mecanico extends Persona {
     }
 
 
+    public ArrayList<Escuderia> getEscuderiasMecanicos() {
+
+        return escuderiasMecanicos;
+    }
+
+
+    public String nombreMecanico() {
+
+        return getNombrePersona(); 
+
+    }
+
+
+    public String apellidoMecanico() {
+
+        return getApellidoPersona(); 
+
+    }
+
+
+    public String dniMecanico() {
+
+        return getDni();
+    }
+
+
     public boolean existeEscuderia(Escuderia esc) {
 
-        for (Escuderia e : escuderias) {
+        for (Escuderia e : escuderiasMecanicos) {
 
             if (e.getNombreEscuderia().equalsIgnoreCase(esc.getNombreEscuderia())) {
 
@@ -96,7 +128,8 @@ public class Mecanico extends Persona {
 
         } 
 
-        escuderias.add(escuderia); 
+        escuderiasMecanicos.add(escuderia); 
+
     
     }
 

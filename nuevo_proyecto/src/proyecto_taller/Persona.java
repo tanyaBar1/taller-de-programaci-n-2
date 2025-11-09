@@ -4,7 +4,7 @@ public class Persona {
 
     private String dni;
 
-    private String nombrePer; 
+    private String nombrePersona; 
 
     private String apellido; 
 
@@ -14,9 +14,11 @@ public class Persona {
 
         dni = "";
 
-        nombrePer = ""; 
+        nombrePersona = ""; 
 
         apellido = ""; 
+
+        pais = null;
 
     } 
 
@@ -26,11 +28,12 @@ public class Persona {
 
         this.dni = dni;
 
-        this.nombrePer = nombre;
+        this.nombrePersona = nombre;
 
         this.apellido = apellido;
         
     }
+    
 
 
     public String getDni() {
@@ -38,15 +41,18 @@ public class Persona {
         return dni;
     }
 
+
     public String getNombrePersona() {
 
-        return nombrePer; 
-    } 
+        return nombrePersona; 
+    }
 
-    public String getApellido() {
+
+    public String getApellidoPersona() {
 
         return apellido;
     } 
+
 
 
     public Pais getPaisPersona() {
@@ -55,20 +61,26 @@ public class Persona {
     }
 
 
+
     public void setDni(String dni) {
 
         this.dni = dni; 
     }
 
+
+
     public void setNombrePersona(String nombre) {
 
-        this.nombrePer = nombre;
+        this.nombrePersona = nombre;
     }
+
+
 
     public void setApellido(String apellido) {
 
         this.apellido = apellido; 
     }
+
 
     public boolean existePais() {
 

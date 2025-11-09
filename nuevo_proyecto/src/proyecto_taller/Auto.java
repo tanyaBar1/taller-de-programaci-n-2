@@ -19,7 +19,7 @@ public class Auto {
 
        motor = "";
 
-       this.autoPiloto = new ArrayList<>();
+       autoPiloto = new ArrayList<>();
 
     }
 
@@ -29,6 +29,8 @@ public class Auto {
         this.modelo = modelo; 
 
         this.motor = motor; 
+
+        autoPiloto = new ArrayList<>();
 
     }
 
@@ -71,6 +73,63 @@ public class Auto {
     public ArrayList<AutoPiloto> getAutoPiloto() {
 
         return autoPiloto;
+    }
+    
+
+    public boolean igualAuto(Auto otro) {
+
+        return this.modelo.equals(otro.getModelo()) && this.motor.equals(otro.getMotor());
+
+    }
+
+
+    public boolean pilotoAsignado(Piloto piloto) {
+
+        for (AutoPiloto ap : autoPiloto) {
+
+            if (ap.getPiloto().getDniPiloto().equals(piloto.getDniPiloto())) {
+
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+
+    public boolean asignarPiloto(Piloto piloto, String fechaAsignacion) {
+
+        if (pilotoAsignado(piloto)) {
+
+            System.out.println("Este piloto ya está asignado a este auto.");
+
+            return false;
+
+        }
+
+        for (AutoPiloto ap : autoPiloto) {
+
+            if (ap.getFechaAsignacion().equals(fechaAsignacion)) {
+
+                System.out.println("El auto ya tiene un piloto asignado en esa fecha.");
+
+                return false;
+
+            }
+
+        }
+
+        AutoPiloto nuevoAutoPiloto = new AutoPiloto(fechaAsignacion);
+
+        nuevoAutoPiloto.setAuto(this);
+
+        nuevoAutoPiloto.setPiloto(piloto);
+
+        autoPiloto.add(nuevoAutoPiloto);
+
+        return true;
+
     }
 
 
