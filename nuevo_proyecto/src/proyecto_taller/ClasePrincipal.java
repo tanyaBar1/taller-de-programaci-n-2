@@ -17,7 +17,7 @@ public class ClasePrincipal {
         System.out.println("--Creación de entidades base y personas--");
 
          //creacion de paises;
-          Pais espana = new Pais(1, "España");
+          Pais espania = new Pais(1, "España");
         
           Pais francia = new Pais(2,"Francia");
 
@@ -91,9 +91,12 @@ public class ClasePrincipal {
            participante3.setPiloto(piloto3);
 
 
-         Carrera granPremioEspanaCarrera = new Carrera( "2025/05/30", 66,"17:00hs", espana, circuito1, participante1);
+         Carrera granPremioEspanaCarrera = new Carrera( "2025/05/30", 66 ,"17:00hs", participante1);
          granPremioEspanaCarrera.agregarParticipante(participante2);
          granPremioEspanaCarrera.agregarParticipante(participante3);
+
+         granPremioEspanaCarrera.setCircuito(circuito1);
+         granPremioEspanaCarrera.setPais(espania);
          
 
          participante1.setAuto(auto1);
